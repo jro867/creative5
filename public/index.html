@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
      <link rel="stylesheet" href="stylesheets/style.css">
+     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
      <script src="javascripts/app.js"></script>
   </head>
@@ -51,27 +52,15 @@
       <hr class="featurette-divider under-main-image">
     </div>
 
+    <!-- <div class="container"> -->
     <div class="container">
-
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <div class="col-lg-4">
-          <h2>Heading</h2>
+        <div class="col-lg-4" ng-repeat="content in contents">
+          <h2>{{content.title}}</h2>
           <a href="#"><img class="add-new-content" src="images/add.png"></img></a>
           <img class="intro-image" src="images/placeholder.gif">          
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <img class="intro-image" src="images/placeholder.gif">           
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <img class="intro-image" src="images/placeholder.gif">           
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p>{{content.content}}</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
@@ -104,22 +93,22 @@
 
 
      <div class="modal">
-      <form class="form-style-7" ng-submit="addComment()">
+      <form class="form-style-7" ng-submit="addContent()">
         <ul>
         <li>
             <label for="title">Title</label>
-            <input type="text" name="name" maxlength="100">
+            <input type="text" name="name" ng-model="formTitle" maxlength="300">
             <span>Enter title of the content in here</span>
         </li>
         <li>
             <label for="content">Content</label>
-            <textarea class="add-content-main"type="text" name="content"></textarea>
+            <textarea class="add-content-main"type="text" ng-model="formContent" name="content"></textarea>
             <!-- <input class="add-content-main"type="text" name="content"> -->
             <span>Enter content in here</span>
         </li>
         <li>
             <label for="url">Image</label>
-            <input type="text" name="image" maxlength="100">
+            <input type="text" name="image" ng-model="formPicture" maxlength="100">
             <span>Enter the image url(eg:http://myimage.jpg)</span>
         </li>
             <input type="submit" value="Add content" >

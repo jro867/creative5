@@ -2,41 +2,32 @@ angular.module('blogger', [])
 .controller('MainCtrl', [
   '$scope','$http',
   function($scope,$http){
-    $scope.test = 'Hello world!';
-	  $scope.comments = [
-      {title:'Comment 1', upvotes:5},
-      {title:'Comment 2', upvotes:6},
-      {title:'Comment 3', upvotes:1},
-      {title:'Comment 4', upvotes:4},
-      {title:'Comment 5', upvotes:3}
+   //  $scope.test = 'Hello world!';
+	  $scope.contents = [
+      {title:'Content 1', content:'s'},
+      {title:'Content 2', content:'s'},
+      {title:'Content 3', content:'s'},
     ];
-    $scope.create = function(comment) {
-      return $http.post('/comments', comment).success(function(data){
-        $scope.comments.push(data);
+    $scope.create = function(data){
+      return $http.post('/content', data).success(function(data){
+        // console.log("Blame thing: ", data);
+        $scope.contents.push(data);
       });
     };
-	$scope.addContent = function() {
-	  $scope.create({title:$scope.formContent,upvotes:0});
-      $scope.formContent='';
-    };
-    $scope.upvote = function(comment) {
-      return $http.put('/comments/' + comment._id + '/upvote')
-        .success(function(data){
-          console.log("upvote worked");
-          comment.upvotes = data.upvotes;
-        });
-    };
+	$scope.addContent = function(){
+    console.log("Add content");
+	  $scope.create({title:$scope.formTitle,content:$scope.formContent, picture:$scope.formImage});
+    $scope.formContent='';
+    $scope.formTitle='';
+    $scope.formPicture='';
+  };
 
-    //$scope.delete ...
-	$scope.incrementUpvotes = function(comment) {
-	  $scope.upvote(comment);
-    };
-    $scope.getAll = function() {
-      return $http.get('/comments').success(function(data){
-        angular.copy(data, $scope.comments);
-      });
-    };
-    $scope.getAll();
+  // $scope.getAll = function(){
+  //   return $http.get('/comments').success(function(data){
+  //     angular.copy(data, $scope.comments);
+  //   });
+  // };
+  // $scope.getAll();
 
   }
 ]);

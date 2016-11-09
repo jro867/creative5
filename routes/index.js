@@ -1,78 +1,47 @@
 var express = require('express');
-var https = require('https');
-
 var router = express.Router();
+var mongoose = require('mongoose');
+var Content = mongoose.model('Content');
 
+// router.get('/comments', function(req, res, next) {
+//   Comment.find(function(err, comments){
+//     if(err){ return next(err); }
+//     res.json(comments);
+//   });
+// });
 
-/* GET home page. */
-router.get('/', function(req, res, next){
-  // res.render('index', { title: 'Express' });
-  res.sendFile('weather.html',{root:'public'});
-});
-
-router.get('/owl', function(req, res, next){
-  
-  proxyOwl(req.query.q, function(data){
-  	console.log(data);
-  	res.status(200).json(data);
+router.post('/content', function(req, res, next){
+  var content = new Content(req.body);
+  content.save(function(err, content){
+    if(err){ return next(err); }
+    res.json(content);
   });
-  
 });
 
-router.get('/getcity',function(req,res,next) {
-  console.log("In getcity route");
+// router.param('comment', function(req, res, next, id) { //THIS IS TO GET ONE AT THE TIME
+//   var query = Comment.findById(id);
+//   query.exec(function (err, comment){
+//     if (err) { return next(err); }
+//     if (!comment) { return next(new Error("can't find comment")); }
+//     req.comment = comment;
+//     return next(); //goes back to line 32
+//   });
+// });
 
-  var fs = require('fs');
+// router.get('/comments/:comment', function(req, res) { //THIS IS TO GET ONE AT THE TIME
+//   res.json(req.comment);
+// });
 
-  var myRe = new RegExp("^" + req.query.q);
-  console.log("MYRE: ",myRe);
+// router.delete('/comments/:comment', function(req, res) { //THIS IS TO GET ONE AT THE TIME
+//   req.comment.remove();
+//   res.json(req.comment);
+// });
 
-
-  fs.readFile(__dirname + '/cities.dat.txt',function(err,data){
-   if(err) throw err;
-   var cities = data.toString().split("\n"); 
-
-   var jsonresult = [];
-
-   for(var i = 0; i < cities.length; i++){
-     var result = cities[i].search(myRe);
-	   if(result != -1) {
-	     	console.log(cities[i]);
-	     	jsonresult.push({city:cities[i]});
-    	}
-  	}   
-  // console.log(jsonresult);
-  res.status(200).json(jsonresult);
-  }); 
-
-});
-
-function proxyOwl(term, callback){
-
-  var options = {
-    hostname: 'owlbot.info',
-    port:443,
-    path:"/api/v1/dictionary/"+term+"?format=json",
-    method: 'GET'
-  };
-
-  var req=https.request(options, function(res){
-        var body = "";
-        res.on('data', function (chunk){
-        	var ch = JSON.parse(chunk);
-        	console.log("chunk: ",ch);
-        	callback(ch);
-            // for(d in ch){
-            // 	console.log("pro",ch[d].type);
-            // }
-        });
-        res.on('end', function(){
-        	// console.log("end: ", body);
-             // client_res.writeHead(res.statusCode, res.headers);
-             // client_res.end(body);
-        });
-    });
-  req.end();
-} 
-
+// router.put('/comments/:comment/upvote', function(req, res, next) {
+//   req.comment.upvote(function(err, comment){ //next comes back in here and since comment as a model has an upvote method then
+//     //we can call the upvote from here
+//     if (err) { return next(err); }
+//     res.json(comment);
+//   });
+// });
 module.exports = router;
