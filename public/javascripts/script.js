@@ -19,7 +19,7 @@
       /*========= Search weather  ========= **/
 
       $(".add-new-content").click(function(){
-        // $(".modal").showModal();
+        $(".modal").toggle();
 
 
 
@@ -96,8 +96,19 @@
       $(document.body).css("background-image","url(../images/default-background.jpg)").css("background-repeat","no-repeat");
   });
   
+  function resizeInput() {
+    $(this).attr('size', $(this).val().length);
+  }
+
+$('input[type="text"]')
+    // event handler
+    .keyup(resizeInput)
+    // resize on page load
+    .each(resizeInput);
+
   function addContent(){
     console.log("adding content");
   }
+
 
 });

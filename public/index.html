@@ -17,15 +17,7 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default">
       <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
+       
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
@@ -46,7 +38,6 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="">Default</a></li>
-            <li><a href="">Static top</a></li>
             <li class="active"><a href="">Fixed top <span></span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -58,14 +49,13 @@
       <hr class="featurette-divider under-main-image">
     </div>
 
-    <dialog id="dialog" class="modal">This is the dialog!</dialog>
     <div class="container">
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <h2>Heading</h2>
-          <a href="#"><img class="add-new-content" src="images/add.png" onclick="showDialog()"></img></a>
+          <a href="#"><img class="add-new-content" src="images/add.png"></img></a>
           <img class="intro-image" src="images/placeholder.gif">          
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
@@ -107,25 +97,43 @@
       </div><!-- /.row -->
     </div><!--END OF container-->
 
-    <script>
-
-    function showDialog(){
-      var dialog = document.getElementById('dialog');
-       dialog.showModal();
-       dialog.addEventListener('close', function (event) {
-         if (dialog.returnValue == 'yes') {
-           // ...
-         } else {
-           // ...
-         }
-       });
-    }
-     
-    </script>
     
+
+
+
+     <div class="modal">
+      <form class="form-style-7">
+        <ul>
+        <li>
+            <label for="title">Title</label>
+            <input type="text" name="name" maxlength="100">
+            <span>Enter title of the content in here</span>
+        </li>
+        <li>
+            <label for="content">Content</label>
+            <textarea class="add-content-main"type="text" name="content"></textarea>
+            <!-- <input class="add-content-main"type="text" name="content"> -->
+            <span>Enter content in here</span>
+        </li>
+        <li>
+            <label for="url">Image</label>
+            <input type="text" name="image" maxlength="100">
+            <span>Enter the image url(eg:http://myimage.jpg)</span>
+        </li>
+            <input type="submit" value="Add content" >
+        </li>
+        </ul>
+      </form>
+     </div>
+
+
+
+
+
     <!--<script src="javascripts/jscript.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="javascripts/script.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
   </body>
 </html>
